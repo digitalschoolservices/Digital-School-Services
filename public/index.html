@@ -6,71 +6,132 @@
     <title>ડિજિટલ સ્કૂલ સર્વિસ - ઓનલાઇન પોર્ટલ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f0f2f5; display: flex; flex-direction: column; min-height: 100vh; }
-
-        /* --- SCHOOL HEADER --- */
-        .school-header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 20px 5%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        /* [તમારી બધી જ CSS સ્ટાઇલ્સ અહીં સામેલ છે] */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg,#f5f7fa,#e4ecf7,#d9e4f5);
+            min-height: 100vh;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
         }
-        .header-content { display: flex; align-items: center; gap: 20px; }
-        .logo { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; background: white; }
-        .school-text { flex: 1; }
-        .school-title { font-size: 24px; font-weight: bold; margin-bottom: 5px; letter-spacing: 1px; }
-        .school-subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 8px; }
 
-        /* Animation for Online Result */
+        /* --- PREMIUM HEADER --- */
+        .school-header {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(270deg, #4facfe, #00f2fe, #4facfe);
+            background-size: 400% 400%;
+            animation: headerGradientMove 8s ease infinite;
+            padding: 20px 5%;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        @keyframes headerGradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .school-header::after {
+            content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%);
+            transform: skewX(-25deg); animation: headerShine 5s infinite;
+        }
+
+        @keyframes headerShine { 0% { left: -75%; } 100% { left: 125%; } }
+
+        .header-content { display: flex; align-items: center; gap: 20px; }
+        
+        .logo {
+            width: 85px; height: 85px; border-radius: 50%; object-fit: cover;
+            border: 4px solid #fff; background: #fff;
+            animation: logoEntry 6s ease-in-out infinite;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @keyframes logoEntry {
+            0% { transform: translateX(100vw) scale(0.8); opacity: 0; }
+            20% { transform: translateX(0) scale(1); opacity: 1; }
+            40% { transform: translateY(-8px); box-shadow: 0 0 20px #00e6ff; }
+            70% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateX(-100vw); opacity: 0; }
+        }
+
+        .school-title { 
+            font-size: 26px; font-weight: 700; color: #003366; 
+            background: linear-gradient(45deg, #001f4d, #003366);
+            -webkit-background-clip: text;
+        }
+        
+        .school-subtitle { font-size: 16px; color: #004080; font-weight: 600; }
+
         .animate-charcter {
             text-transform: uppercase;
-            background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
-            background-size: auto auto;
-            background-clip: border-box;
+            background-image: linear-gradient(-225deg, yellow 0, yellow 29%, cyan 67%, cyan 100%);
             background-size: 200% auto;
             color: #fff;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: textclip 2s linear infinite;
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
+            display: inline-block; font-weight: 800; font-size: 15px; letter-spacing: 1px;
         }
         @keyframes textclip { to { background-position: 200% center; } }
 
-        /* --- MAIN CONTAINER --- */
-        .container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
-        .wrap { width: 100%; max-width: 600px; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        
-        .welcome-text { text-align: center; margin-bottom: 30px; }
-        .welcome-text h2 { color: #2c3e50; font-size: 22px; }
-
-        /* --- CONTROLS / BUTTONS --- */
-        .btn-group { display: flex; flex-direction: column; gap: 15px; }
-        .card-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 25px;
-            border-radius: 12px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.3s;
+        /* --- MAIN CARD DESIGN --- */
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; flex: 1; }
+        .card {
+            background: #ffffff; border-radius: 25px; padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); border: none;
         }
-        .card-btn:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .staff-bg { background: #3498db; }
-        .student-bg { background: #2ecc71; }
-        .reg-bg { background: #e67e22; }
 
-        /* --- FOOTER --- */
-        footer { background-color: #2c3e50; color: white; padding: 25px; text-align: center; margin-top: auto; }
-        .footer-links a { color: #bdc3c7; text-decoration: none; margin: 0 10px; font-size: 14px; }
-        .copyright { font-size: 13px; color: #95a5a6; margin-top: 15px; border-top: 1px solid #3e4f5f; padding-top: 10px; }
+        .welcome-section { text-align: center; margin-bottom: 35px; }
+        .welcome-section h2 { color: #1e3a8a; font-size: 24px; margin-bottom: 10px; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 20px; }
+        
+        .card-btn {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 30px; border-radius: 15px; text-decoration: none;
+            color: white; font-weight: bold; font-size: 19px;
+            transition: 0.4s; box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-btn:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+        
+        .staff-bg { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+        .student-bg { background: linear-gradient(45deg, #43cea2, #185a9d); }
+        .reg-bg { background: linear-gradient(45deg, #f093fb, #f5576c); }
+
+        /* --- PREMIUM FOOTER --- */
+        footer {
+            margin-top: 50px;
+            background: linear-gradient(45deg, #1e3a8a, #1e40af);
+            padding: 30px 10px; text-align: center; color: white;
+        }
+
+        .owner-img {
+            width: 110px; height: 110px; border-radius: 50%; object-fit: contain;
+            background: #ffffff; padding: 8px; border: 5px solid transparent;
+            position: relative; transition: 0.4s ease-in-out;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+
+        .owner-img:hover { transform: translateY(-8px) scale(1.08); box-shadow: 0 20px 40px rgba(0,0,0,0.35), 0 0 25px rgba(0,242,254,0.8); }
+
+        .owner-name {
+            font-size: 22px; font-weight: 800; letter-spacing: 1px; margin-top: 10px;
+            background: linear-gradient(45deg,#FFD700,#fff,#FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .owner-phone {
+            font-size: 16px; margin-top: 10px; font-weight: 700;
+            color: #ffffff; background: linear-gradient(45deg,#43cea2,#185a9d);
+            padding: 8px 20px; border-radius: 25px; display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +140,7 @@
     <div class="header-content">
         <img src="school logo.png" class="logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/167/167707.png'">
         <div class="school-text">
-           <div class="school-title">શ્રી કે.એમ.પટેલ પ્રાથમિક શાળા</div>
+           <div class="school-title powered-by-slide">શ્રી કે.એમ.પટેલ પ્રાથમિક શાળા</div>
            <div class="school-subtitle">મહુધા કેળવણી મંડળ સંચાલિત</div> 
            <div class="online-result">
                 <span class="animate-charcter">ONLINE RESULT PORTAL</span>
@@ -89,39 +150,42 @@
 </header>
 
 <div class="container">
-    <div class="wrap">
-        <div class="card">
-            <div class="welcome-text">
-                <h2>સ્વાગત છે - ડિજિટલ સ્કૂલ સર્વિસ</h2>
-                <p style="color: #7f8c8d; font-size: 14px;">કૃપા કરીને લોગિન પ્રકાર પસંદ કરો</p>
-            </div>
+    <div class="card">
+        <div class="welcome-section">
+            <h2>ડિજિટલ સ્કૂલ સર્વિસ - પોર્ટલ</h2>
+            <p style="color: #64748b; font-weight: 600;">તમારો રોલ પસંદ કરી આગળ વધો</p>
+        </div>
 
-            <div class="btn-group">
-                <a href="login.html" class="card-btn staff-bg">
-                    <span><i class="fas fa-user-tie"></i> શાળા સ્ટાફ લોગિન</span>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-                
-                <a href="student-login.html" class="card-btn student-bg">
-                    <span><i class="fas fa-user-graduate"></i> વિદ્યાર્થી લોગિન</span>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
+        <div class="btn-group">
+            <a href="login.html" class="card-btn staff-bg">
+                <span><i class="fas fa-user-tie"></i> શાળા સ્ટાફ લોગિન</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            
+            <a href="student-login.html" class="card-btn student-bg">
+                <span><i class="fas fa-user-graduate"></i> વિદ્યાર્થી લોગિન</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
 
-                <a href="register.html" class="card-btn reg-bg">
-                    <span><i class="fas fa-school"></i> નવી શાળા નોંધણી (Register)</span>
-                    <i class="fas fa-plus-circle"></i>
-                </a>
-            </div>
+            <a href="register.html" class="card-btn reg-bg">
+                <span><i class="fas fa-school"></i> નવી શાળા નોંધણી</span>
+                <i class="fas fa-plus-circle"></i>
+            </a>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="footer-links">
-        <a href="#">અમારા વિશે</a> | <a href="#">સંપર્ક કરો</a> | <a href="#">મદદ</a>
+    <div class="footer-slider">
+        <div class="footer-item active">
+            <img src="school logo.png" class="owner-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/167/167707.png'">
+            <div class="owner-name">ડિજિટલ સ્કૂલ સિસ્ટમ</div>
+            <div class="owner-title" style="color: #bdc3c7;">મહુધા કેળવણી મંડળ</div>
+            <div class="owner-phone"><i class="fas fa-phone-alt"></i> સંપર્ક: +91 9XXXX XXXXX</div>
+        </div>
     </div>
-    <div class="copyright">
-        &copy; 2026 ડિજિટલ સ્કૂલ સર્વિસ. પાવર્ડ બાય: શ્રી કે.એમ.પટેલ પ્રાથમિક શાળા
+    <div class="copyright" style="margin-top: 20px; font-size: 12px; opacity: 0.7;">
+        &copy; 2026. All Rights Reserved.
     </div>
 </footer>
 
