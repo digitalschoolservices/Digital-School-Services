@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>સ્ટાફ લોગિન | સુરક્ષિત પ્રવેશ</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #eef2f3; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 350px; }
+        .login-card h2 { text-align: center; color: #333; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; color: #666; }
+        .input-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn-login { width: 100%; padding: 10px; background: #27ae60; border: none; color: white; font-size: 16px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        .btn-login:hover { background: #219150; }
+        .footer-link { text-align: center; margin-top: 15px; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>સ્ટાફ લોગિન</h2>
+    <form id="staffLoginForm">
+        <div class="input-group">
+            <label>ઈમેલ એડ્રેસ</label>
+            <input type="email" id="staffEmail" placeholder="તમારો ઈમેલ લખો" required autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label>પાસવર્ડ</label>
+            <input type="password" id="staffPassword" placeholder="પાસવર્ડ લખો" required>
+        </div>
+        <button type="submit" class="btn-login">પ્રવેશ કરો</button>
+    </form>
+    <div class="footer-link">
+        <a href="index.html">પાછા જાઓ</a>
+    </div>
+</div>
+
+<script>
+    // અહીં આપણે JavaScript લખીશું જે સર્વર સાથે વાત કરશે
+document.getElementById('staffLoginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('staffEmail').value;
+    const password = document.getElementById('staffPassword').value;
+    
+    try {
+        const response = await fetch('http://localhost:5000/api/login-school', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ adminEmail: email, adminPassword: password })
+        });
+
+        const result = await response.json();
+
+        if (response.status === 200) {
+            alert("સ્વાગત છે, " + result.schoolName);
+            // ટોકન અને સ્કૂલનું નામ બ્રાઉઝરમાં સાચવી લો
+            localStorage.setItem('schoolToken', result.token);
+            localStorage.setItem('schoolName', result.schoolName);
+            
+            // લોગિન થયા પછી ડેશબોર્ડ પર મોકલીશું (જે આપણે હવે બનાવીશું)
+            // window.location.href = 'dashboard.html'; 
+        } else {
+            alert("ભૂલ: " + result.message);
+        }
+    } catch (error) {
+        alert("સર્વર સાથે કનેક્શન થઈ શક્યું નથી!");
+    }
+});
+    document.getElementById('staffLoginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('staffEmail').value;
+        const password = document.getElementById('staffPassword').value;
+        
+        console.log("લોગિન રિક્વેસ્ટ મોકલાઈ રહી છે:", email);
+        // આગળ આપણે અહીં Backend API ને કનેક્ટ કરીશું
+    });
+
+console.log("લોગિન રિક્વેસ્ટ મોકલાઈ રહી છે:", email);
+
+try {
+    const response = await fetch('/api/login-school', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adminEmail: email, adminPassword: password })
+    });
+
+    console.log("સર્વરનો રિસ્પોન્સ સ્ટેટસ:", response.status); // આ લાઈન ઉમેરો
+
+    const result = await response.json();
+    console.log("સર્વરનો ડેટા:", result); // આ લાઈન ઉમેરો
+
+    if (response.status === 200) {
+        localStorage.setItem('schoolToken', result.token);
+        localStorage.setItem('schoolName', result.schoolName);
+        window.location.href = '/dashboard.html'; 
+    } else {
+        alert(result.message);
+    }
+} catch (error) {
+    console.error("Fetch Error:", error); // આ લાઈન ભૂલ બતાવશે
+}
+</script>
+
+</body>
+</html>

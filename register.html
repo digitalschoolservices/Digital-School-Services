@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>નવી સ્કૂલ રજીસ્ટ્રેશન</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .reg-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { text-align: center; color: #1a73e8; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #444; font-weight: bold; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        input:focus { border-color: #1a73e8; outline: none; box-shadow: 0 0 5px rgba(26,115,232,0.2); }
+        .btn-submit { width: 100%; padding: 12px; background: #1a73e8; border: none; color: white; font-size: 16px; border-radius: 6px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #1557b0; }
+        #message { margin-top: 15px; text-align: center; font-weight: bold; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+
+<div class="reg-card">
+    <h2>નવી સ્કૂલ રજીસ્ટર કરો</h2>
+    <form id="registerForm">
+        <div class="form-group">
+            <label>સ્કૂલનું નામ</label>
+            <input type="text" id="schoolName" placeholder="દા.ત. આદર્શ વિદ્યાલય" required>
+        </div>
+        <div class="form-group">
+            <label>શહેર</label>
+            <input type="text" id="schoolCity" placeholder="દા.ત. અમદાવાદ" required>
+        </div>
+        <div class="form-group">
+            <label>એડમિન ઈમેલ</label>
+            <input type="email" id="adminEmail" placeholder="admin@school.com" required>
+        </div>
+        <div class="form-group">
+            <label>પાસવર્ડ સેટ કરો</label>
+            <input type="password" id="adminPassword" placeholder="મજબૂત પાસવર્ડ રાખો" required>
+        </div>
+        <button type="submit" class="btn-submit">રજીસ્ટર કરો</button>
+    </form>
+    <div id="message"></div>
+</div>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerText = "પ્રોસેસ થઈ રહી છે...";
+
+        const data = {
+            schoolName: document.getElementById('schoolName').value,
+            schoolCity: document.getElementById('schoolCity').value,
+            adminEmail: document.getElementById('adminEmail').value,
+            adminPassword: document.getElementById('adminPassword').value
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/api/register-school', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.status === 201) {
+                messageDiv.className = "success";
+                messageDiv.innerText = "✅ " + result.message;
+                document.getElementById('registerForm').reset();
+            } else {
+                messageDiv.className = "error";
+                messageDiv.innerText = "❌ " + result.message;
+            }
+        } catch (error) {
+            messageDiv.className = "error";
+            messageDiv.innerText = "❌ સર્વર સાથે કનેક્ટ થઈ શક્યું નથી!";
+        }
+    });
+</script>
+
+</body>
+</html>
