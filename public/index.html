@@ -149,29 +149,125 @@
     </div>
 </header>
 
+<style>
+    /* ગ્રીડ લેઆઉટ સેટિંગ્સ */
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+    }
+
+    /* અત્યાધુનિક કાર્ડ ડિઝાઇન */
+    .modern-card {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 40px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* હોવર ઇફેક્ટ */
+    .modern-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* આઇકોન સ્ટાઇલ */
+    .card-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 35px;
+        margin-bottom: 20px;
+        transition: 0.3s;
+        color: white;
+    }
+
+    .modern-card h3 {
+        font-size: 20px;
+        color: #2c3e50;
+        margin-bottom: 10px;
+    }
+
+    .modern-card p {
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+
+    /* કાર્ડ વાઇઝ કલર્સ */
+    .staff-card .card-icon { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .student-card .card-icon { background: linear-gradient(135deg, #43cea2, #185a9d); }
+    .register-card .card-icon { background: linear-gradient(135deg, #f093fb, #f5576c); }
+
+    /* નીચેની નાની એરો લાઈન */
+    .card-arrow {
+        margin-top: 15px;
+        font-size: 18px;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: 0.3s;
+    }
+    .modern-card:hover .card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* રિસ્પોન્સિવ (મોબાઈલ માટે) */
+    @media (max-width: 600px) {
+        .card-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
 <div class="container">
-    <div class="card">
-        <div class="welcome-section">
-            <h2>ડિજિટલ સ્કૂલ સર્વિસ - પોર્ટલ</h2>
-            <p style="color: #64748b; font-weight: 600;">તમારો રોલ પસંદ કરી આગળ વધો</p>
-        </div>
+    <div class="welcome-section">
+        <h2>ડિજિટલ સ્કૂલ સર્વિસ - પોર્ટલ</h2>
+        <p style="color: #64748b; font-weight: 600;">તમારો રોલ પસંદ કરી આગળ વધો</p>
+    </div>
 
-        <div class="btn-group">
-            <a href="login.html" class="card-btn staff-bg">
-                <span><i class="fas fa-user-tie"></i> શાળા સ્ટાફ લોગિન</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-            
-            <a href="student-login.html" class="card-btn student-bg">
-                <span><i class="fas fa-user-graduate"></i> વિદ્યાર્થી લોગિન</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
+    <div class="card-grid">
+        <!-- સ્ટાફ કાર્ડ -->
+        <a href="login.html" class="modern-card staff-card">
+            <div class="card-icon">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <h3>શાળા સ્ટાફ</h3>
+            <p>હાજરી, ગુણ અને એડમિન કામગીરી માટે</p>
+            <div class="card-arrow" style="color: #4facfe;"><i class="fas fa-arrow-right"></i></div>
+        </a>
 
-            <a href="register.html" class="card-btn reg-bg">
-                <span><i class="fas fa-school"></i> નવી શાળા નોંધણી</span>
-                <i class="fas fa-plus-circle"></i>
-            </a>
-        </div>
+        <!-- વિદ્યાર્થી કાર્ડ -->
+        <a href="student-login.html" class="modern-card student-card">
+            <div class="card-icon">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <h3>વિદ્યાર્થીઓ</h3>
+            <p>ઓનલાઇન રિઝલ્ટ અને પ્રોફાઇલ જોવા માટે</p>
+            <div class="card-arrow" style="color: #43cea2;"><i class="fas fa-arrow-right"></i></div>
+        </a>
+
+        <!-- નવી નોંધણી કાર્ડ -->
+        <a href="register.html" class="modern-card register-card">
+            <div class="card-icon">
+                <i class="fas fa-school"></i>
+            </div>
+            <h3>નવી નોંધણી</h3>
+            <p>તમારી શાળાને ડિજિટલ બનાવવા માટે</p>
+            <div class="card-arrow" style="color: #f5576c;"><i class="fas fa-arrow-right"></i></div>
+        </a>
     </div>
 </div>
 
