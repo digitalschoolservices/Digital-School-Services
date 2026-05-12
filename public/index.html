@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ડિજિટલ સ્કૂલ સર્વિસ - હોમ પેજ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* હેડર ડિઝાઇન */
+        header {
+            background-color: #ffffff;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-icon {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 24px;
+        }
+        .brand-name { font-size: 24px; font-weight: bold; color: #2c3e50; }
+
+        /* મુખ્ય સેક્શન */
+        main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+        .hero-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        h2 { color: #34495e; margin-bottom: 10px; }
+        .sub-text { color: #7f8c8d; margin-bottom: 30px; }
+
+        /* બટન સ્ટાઈલ */
+        .btn-group { display: flex; flex-direction: column; gap: 20px; }
+        .card-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-btn:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .staff-bg { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .student-bg { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+
+        /* ફૂટર ડિઝાઇન */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+        .footer-links { margin-bottom: 15px; }
+        .footer-links a { color: #bdc3c7; text-decoration: none; margin: 0 15px; font-size: 14px; }
+        .footer-links a:hover { color: white; }
+        .copyright { font-size: 14px; color: #95a5a6; border-top: 1px solid #3e4f5f; padding-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="brand-name">ડિજિટલ સ્કૂલ સર્વિસ</div>
+        </div>
+        <div>
+            <a href="register.html" style="text-decoration: none; color: #3498db; font-weight: 600;">નવી શાળા નોંધણી</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="hero-container">
+            <h2>સ્વાગત છે!</h2>
+            <p class="sub-text">કૃપા કરીને તમારો રોલ પસંદ કરો</p>
+            
+            <div class="btn-group">
+                <a href="login.html" class="card-btn staff-bg">
+                    <span><i class="fas fa-user-tie"></i> શાળા સ્ટાફ લોગિન</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                
+                <a href="student-login.html" class="card-btn student-bg">
+                    <span><i class="fas fa-user-graduate"></i> વિદ્યાર્થી લોગિન</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">અમારા વિશે</a>
+            <a href="#">સંપર્ક કરો</a>
+            <a href="#">પ્રાઈવસી પોલિસી</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 ડિજિટલ સ્કૂલ સર્વિસ. સર્વાધિકાર સુરક્ષિત.
+        </div>
+    </footer>
+
+</body>
+</html>
